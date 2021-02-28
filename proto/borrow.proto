@@ -1,0 +1,53 @@
+syntax = "proto3";
+
+package borrow;
+
+option go_package = "proto;borrow";
+/*
+  status状态约定：
+  200：成功
+  201：失败
+  202：未知错误
+*/
+service Borrow {
+  rpc Borrow(Borrow_Request)returns(Response);
+  rpc Return(Returns_Request)returns(Response);
+  rpc ToOther(to_other_request)returns(Response);
+}
+message Borrow_Request{
+  int64 worker_id = 1;//借出人信息
+  int64 product_id = 2;//借出产品信息
+  int64 borrow_time = 3;//借出时间
+  int64 schedule_time = 4;//预计归还时间
+  int64 return_time = 5;
+  string description = 6;//备注信息,转借等等说明
+}
+message Returns_Request{
+  int64 id = 1;
+}
+message to_other_request{
+  int64 id = 1;//物品已有记录
+  int64 wid = 2;//其它人的id，方便变更
+}
+message Response{
+  int64 status = 1;
+  string message = 2;
+}
+/*
+package model
+type Product struct{
+	ID int64 `gorm:"primary_key;not_null;auto_increment"`
+	ProductName string `json:"product_name"`
+	ProductDescription string `json:"product_description"`
+	Level int64 `json:"level"`
+	Category int64 `json:"category"`//指向categoryid
+	Important bool `json:"important"`//说明是否重要
+	Is bool `json:"is"`//是否在库
+	BelongCustom int64 `json:"belong_custom"`//当前所属用户ID
+	BelongArea int64 `json:"belong_area"`//所属库房
+	Location string `json:"location"`//最新的定位信息
+	Rfid string `json:"rfid"`//rfid标记
+	ImageID int64 `json:"image_id"`//图片地址对应的id（可上传）
+}
+
+*/

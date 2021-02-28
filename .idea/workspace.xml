@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="af997420-9002-4734-98af-518470257679" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../borrowApi/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../borrowApi/.idea/borrowApi.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../borrowApi/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../borrowApi/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../borrowApi/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../borrowApi/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../borrowApi/Makefile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../borrowApi/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../borrowApi/generate.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../borrowApi/go.mod" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../borrowApi/go.sum" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../borrowApi/handler/borrowApi.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../borrowApi/main.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../borrowApi/plugin.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../borrowApi/proto/borrowApi/borrowApi.proto" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../borrowApi/proto/imports/api.proto" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../borrowApi/subscriber/borrowApi.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WorkWeb" beforeDir="false" afterPath="$PROJECT_DIR$/../WorkWeb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../worksApi/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../worksApi/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../worksApi/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../worksApi/.idea/worksApi.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../worksApi/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../worksApi/Dockerfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../worksApi/Makefile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../worksApi/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../worksApi/generate.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../worksApi/go.mod" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../worksApi/go.sum" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../worksApi/handler/worksApi.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../worksApi/main" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../worksApi/main.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../worksApi/micro" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../worksApi/micro.mu" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../worksApi/plugin.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../worksApi/proto/worksApi.pb.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../worksApi/proto/worksApi.pb.micro.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../worksApi/proto/worksApi.proto" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Go File" />
+      </list>
+    </option>
+  </component>
+  <component name="GOROOT" url="file:///usr/local/go" />
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GoLibraries">
+    <option name="indexEntireGoPath" value="false" />
+  </component>
+  <component name="ProjectId" id="1oanf8OCs5dIhcLgC7WD3cYNh9K" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="DefaultGoTemplateProperty" value="Go File" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="go.import.settings.migrated" value="true" />
+    <property name="go.sdk.automatically.set" value="true" />
+    <property name="go.tried.to.enable.integration.vgo.integrator" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="RunManager" selected="Go Build.go build product_log.go">
+    <configuration name="go build github.com/PonyWilliam/go-borrow" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="borrow" />
+      <working_directory value="$PROJECT_DIR$" />
+      <kind value="PACKAGE" />
+      <filePath value="$PROJECT_DIR$/main.go" />
+      <package value="github.com/PonyWilliam/go-borrow" />
+      <directory value="$PROJECT_DIR$" />
+      <method v="2" />
+    </configuration>
+    <configuration name="go build product_log.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="borrow" />
+      <working_directory value="$PROJECT_DIR$" />
+      <kind value="FILE" />
+      <filePath value="$PROJECT_DIR$/domain/repository/product_log.go" />
+      <package value="borrow" />
+      <directory value="$PROJECT_DIR$" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Go Build.go build product_log.go" />
+        <item itemvalue="Go Build.go build github.com/PonyWilliam/go-borrow" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VgoProject">
+    <integration-enabled>true</integration-enabled>
+  </component>
+</project>
