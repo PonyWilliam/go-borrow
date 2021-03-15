@@ -13,6 +13,7 @@ type IProductLog interface {
 	Borrow(WID int64,PID int64,ScheduleTime int64) (id int64,err error)
 	Return(ID int64)error
 	UpdateToOther(ID int64,WID int64)error//转借给其它人的记录
+	CheckToOther(ID int64,WID int64)error
 }
 func NewProductLogRepository(db *gorm.DB)	IProductLog{
 	return &ProductLog{mysql: db}
@@ -31,9 +32,32 @@ func(p *ProductLog)Borrow(WID int64,PID int64,ScheduleTime int64)(id int64,err e
 	return log.ID,p.mysql.Model(log).Create(&log).Error
 }
 func(p *ProductLog)Return(ID int64)error{
+	log := &model.ProductLog{}
+	p.mysql.Where("id = ?",ID).Last(&log)
+	if log.ReturnTime != 0{
+		return errors.New("已归还过该物品")
+	}
+
 	return p.mysql.Model(&model.ProductLog{}).Where("id = ?",ID).Update("ReturnTime",time.Now().Unix()).Error
 }
 func(p *ProductLog)UpdateToOther(ID int64,WID int64)error{
+	log := &model.ProductLog{}
+	p.mysql.Where("id = ?",ID).First(&log)
+	fmt.Println(log)
+	times := time.Now().Unix()
+	err := p.mysql.Model(log).Where("id = ?",ID).Update("ReturnTime",times).Error
+	if err != nil{
+		return err
+	}
+	p.mysql.Where("id = ?",ID).Find(&log)
+	log.Description = "转借于:" + strconv.FormatInt(log.WID,10)
+	log.BorrowTime = times
+	log.ReturnTime = 0
+	log.WID = WID
+	log.ID = 0
+	return p.mysql.Model(log).Create(&log).Error
+}
+func(p *ProductLog)CheckToOther(ID int64,WID int64)error{
 	log := &model.ProductLog{}
 	p.mysql.Where("id = ?",ID).First(&log)
 
@@ -47,17 +71,7 @@ func(p *ProductLog)UpdateToOther(ID int64,WID int64)error{
 
 	times := time.Now().Unix()
 	if times - log.ReturnTime < 3600 * 3{
-		return errors.New("距离预定归还时间少于三小时物品不能再次借出")
+		return errors.New("距离预定归还时间少于三小时物品不能转借")
 	}
-	err := p.mysql.Model(log).Where("id = ?",ID).Update("ReturnTime",times).Error
-	if err != nil{
-		return err
-	}
-	p.mysql.Where("id = ?",ID).Find(&log)
-	log.Description = "转借于:" + strconv.FormatInt(log.WID,10)
-	log.BorrowTime = times
-	log.ReturnTime = 0
-	log.WID = WID
-	log.ID = 0
-	return p.mysql.Model(log).Create(&log).Error
+	return nil//都没有则可以转。
 }

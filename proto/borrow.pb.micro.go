@@ -45,6 +45,7 @@ type BorrowService interface {
 	Borrow(ctx context.Context, in *Borrow_Request, opts ...client.CallOption) (*Response, error)
 	Return(ctx context.Context, in *Returns_Request, opts ...client.CallOption) (*Response, error)
 	ToOther(ctx context.Context, in *ToOtherRequest, opts ...client.CallOption) (*Response, error)
+	CheckToOther(ctx context.Context, in *ToOtherRequest, opts ...client.CallOption) (*Response, error)
 }
 
 type borrowService struct {
@@ -89,12 +90,23 @@ func (c *borrowService) ToOther(ctx context.Context, in *ToOtherRequest, opts ..
 	return out, nil
 }
 
+func (c *borrowService) CheckToOther(ctx context.Context, in *ToOtherRequest, opts ...client.CallOption) (*Response, error) {
+	req := c.c.NewRequest(c.name, "Borrow.CheckToOther", in)
+	out := new(Response)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for Borrow service
 
 type BorrowHandler interface {
 	Borrow(context.Context, *Borrow_Request, *Response) error
 	Return(context.Context, *Returns_Request, *Response) error
 	ToOther(context.Context, *ToOtherRequest, *Response) error
+	CheckToOther(context.Context, *ToOtherRequest, *Response) error
 }
 
 func RegisterBorrowHandler(s server.Server, hdlr BorrowHandler, opts ...server.HandlerOption) error {
@@ -102,6 +114,7 @@ func RegisterBorrowHandler(s server.Server, hdlr BorrowHandler, opts ...server.H
 		Borrow(ctx context.Context, in *Borrow_Request, out *Response) error
 		Return(ctx context.Context, in *Returns_Request, out *Response) error
 		ToOther(ctx context.Context, in *ToOtherRequest, out *Response) error
+		CheckToOther(ctx context.Context, in *ToOtherRequest, out *Response) error
 	}
 	type Borrow struct {
 		borrow
@@ -124,4 +137,8 @@ func (h *borrowHandler) Return(ctx context.Context, in *Returns_Request, out *Re
 
 func (h *borrowHandler) ToOther(ctx context.Context, in *ToOtherRequest, out *Response) error {
 	return h.BorrowHandler.ToOther(ctx, in, out)
+}
+
+func (h *borrowHandler) CheckToOther(ctx context.Context, in *ToOtherRequest, out *Response) error {
+	return h.BorrowHandler.CheckToOther(ctx, in, out)
 }

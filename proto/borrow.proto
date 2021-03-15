@@ -13,6 +13,7 @@ service Borrow {
   rpc Borrow(Borrow_Request)returns(Response);
   rpc Return(Returns_Request)returns(Response);
   rpc ToOther(to_other_request)returns(Response);
+  rpc CheckToOther(to_other_request)returns(Response);
 }
 message Borrow_Request{
   int64 worker_id = 1;//借出人信息

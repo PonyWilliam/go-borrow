@@ -6,6 +6,7 @@ type IProService interface {
 	Borrow(WID int64,PID int64,ScheduleTime int64) (id int64,err error)
 	Return(ID int64)error
 	UpdateToOther(ID int64,WID int64)error//转借给其它人的记录
+	CheckToOther(ID int64,WID int64)error
 }
 func NewWorkerService(pro repository.IProductLog)IProService{
 	return &ProServices{pro}
@@ -21,4 +22,7 @@ func(p *ProServices)Return(ID int64)error{
 }
 func(p *ProServices)UpdateToOther(ID int64,WID int64)error{
 	return p.pro.UpdateToOther(ID,WID)
+}
+func(p *ProServices)CheckToOther(ID int64,WID int64)error{
+	return p.pro.CheckToOther(ID,WID)
 }

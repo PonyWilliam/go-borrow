@@ -20,7 +20,7 @@ func(p *ProductLog)Borrow(ctx context.Context,req *borrow.Borrow_Request,rsp *bo
 	if err!=nil{
 		rsp.Message = err.Error()
 		rsp.Status = 0
-		return err
+		return nil
 	}
 	rsp.Message = strconv.FormatInt(id,10)
 	rsp.Status = 1
@@ -31,7 +31,7 @@ func(p *ProductLog)Return(ctx context.Context,req *borrow.Returns_Request,rsp *b
 	if err!=nil{
 		rsp.Message = err.Error()
 		rsp.Status = 0
-		return err
+		return nil
 	}
 	rsp.Message = "success return"
 	rsp.Status = 1
@@ -42,7 +42,18 @@ func(p *ProductLog)ToOther(ctx context.Context,req *borrow.ToOtherRequest,rsp *b
 	if err!=nil{
 		rsp.Message = err.Error()
 		rsp.Status = 0
-		return err
+		return nil
+	}
+	rsp.Message = "success update"
+	rsp.Status = 1
+	return nil
+}
+func(p *ProductLog)CheckToOther(ctx context.Context,req *borrow.ToOtherRequest,rsp *borrow.Response)error{
+	err := p.IProService.CheckToOther(req.Id,req.Wid)
+	if err!=nil{
+		rsp.Message = err.Error()
+		rsp.Status = 0
+		return nil
 	}
 	rsp.Message = "success update"
 	rsp.Status = 1

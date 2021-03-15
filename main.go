@@ -29,7 +29,7 @@ func main() {
 		log.Fatal(err)
 	}
 	srv := micro.NewService(
-		micro.Name("micro.service.borrow"),
+		micro.Name("go.micro.service.borrow"),
 		micro.Version("latest"),
 		micro.Address("0.0.0.0:8086"),
 		micro.Registry(consulRegistry),
