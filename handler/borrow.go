@@ -4,6 +4,7 @@ import (
 	"context"
 	"github.com/PonyWilliam/go-borrow/domain/server"
 	borrow "github.com/PonyWilliam/go-borrow/proto"
+	"github.com/PonyWilliam/go-common"
 	"strconv"
 )
 
@@ -57,5 +58,41 @@ func(p *ProductLog)CheckToOther(ctx context.Context,req *borrow.ToOtherRequest,r
 	}
 	rsp.Message = "success update"
 	rsp.Status = 1
+	return nil
+}
+func(p *ProductLog)FindBorrowAll(ctx context.Context,req *borrow.Null_Request,rsp *borrow.Borrowlogs_Response)error{
+	res,err := p.IProService.FindBorrowAll()
+	if err!=nil{
+		rsp.Logs = nil
+		return nil
+	}
+	_ = common.SwapTo(res, rsp)
+	return nil
+}
+func(p *ProductLog)FindBorrowByID(ctx context.Context,req *borrow.ID_Request,rsp *borrow.Borrowlog_Response)error{
+	res,err := p.IProService.FindBorrowByID(req.Id)
+	if err!=nil{
+		rsp = nil
+		return nil
+	}
+	_ = common.SwapTo(res, rsp)
+	return nil
+}
+func(p *ProductLog)FindBorrowByWID(ctx context.Context,req *borrow.WID_Request,rsp *borrow.Borrowlogs_Response)error{
+	res,err := p.IProService.FindBorrowByWID(req.WID)
+	if err!=nil{
+		rsp.Logs = nil
+		return nil
+	}
+	_ = common.SwapTo(res, rsp)
+	return nil
+}
+func(p *ProductLog)FindBorrowByPID(ctx context.Context,req *borrow.PID_Request,rsp *borrow.Borrowlogs_Response)error{
+	res,err := p.IProService.FindBorrowByProductID(req.PID)
+	if err!=nil{
+		rsp.Logs = nil
+		return nil
+	}
+	_ = common.SwapTo(res, rsp)
 	return nil
 }

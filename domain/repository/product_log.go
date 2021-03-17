@@ -14,6 +14,10 @@ type IProductLog interface {
 	Return(ID int64)error
 	UpdateToOther(ID int64,WID int64)error//转借给其它人的记录
 	CheckToOther(ID int64,WID int64)error
+	FindBorrowAll()([]*model.ProductLog,error)
+	FindBorrowByID(ID int64)(*model.ProductLog,error)
+	FindBorrowByWID(WID int64)([]*model.ProductLog,error)
+	FindBorrowByProductID(PID int64)([]*model.ProductLog,error)
 }
 func NewProductLogRepository(db *gorm.DB)	IProductLog{
 	return &ProductLog{mysql: db}
@@ -73,5 +77,25 @@ func(p *ProductLog)CheckToOther(ID int64,WID int64)error{
 	if times - log.ReturnTime < 3600 * 3{
 		return errors.New("距离预定归还时间少于三小时物品不能转借")
 	}
+
 	return nil//都没有则可以转。
+}
+
+/*
+	FindBorrowAll()([]*model.ProductLog,error)
+	FindBorrowByID(ID int64)(*model.ProductLog,error)
+	FindBorrowByWID(WID int64)([]*model.ProductLog,error)
+	FindBorrowByProductID(PID int64)([]*model.ProductLog,error)
+*/
+func(p *ProductLog)FindBorrowAll()(logs []*model.ProductLog,err error){
+	return logs,p.mysql.Model(&logs).Find(logs).Error
+}
+func(p *ProductLog)FindBorrowByID(ID int64)(log *model.ProductLog,err error){
+	return log,p.mysql.Where("id = ?",ID).Find(log).Error
+}
+func(p *ProductLog)FindBorrowByWID(WID int64)(logs []*model.ProductLog,err error){
+	return logs,p.mysql.Where("wid = ?",WID).Find(logs).Error
+}
+func(p *ProductLog)FindBorrowByProductID(PID int64)(logs []*model.ProductLog,err error){
+	return logs,p.mysql.Where("pid = ?",PID).Find(logs).Error
 }

@@ -46,6 +46,10 @@ type BorrowService interface {
 	Return(ctx context.Context, in *Returns_Request, opts ...client.CallOption) (*Response, error)
 	ToOther(ctx context.Context, in *ToOtherRequest, opts ...client.CallOption) (*Response, error)
 	CheckToOther(ctx context.Context, in *ToOtherRequest, opts ...client.CallOption) (*Response, error)
+	FindBorrowAll(ctx context.Context, in *Null_Request, opts ...client.CallOption) (*Borrowlogs_Response, error)
+	FindBorrowByID(ctx context.Context, in *ID_Request, opts ...client.CallOption) (*Borrowlog_Response, error)
+	FindBorrowByWID(ctx context.Context, in *WID_Request, opts ...client.CallOption) (*Borrowlogs_Response, error)
+	FindBorrowByPID(ctx context.Context, in *PID_Request, opts ...client.CallOption) (*Borrowlogs_Response, error)
 }
 
 type borrowService struct {
@@ -100,6 +104,46 @@ func (c *borrowService) CheckToOther(ctx context.Context, in *ToOtherRequest, op
 	return out, nil
 }
 
+func (c *borrowService) FindBorrowAll(ctx context.Context, in *Null_Request, opts ...client.CallOption) (*Borrowlogs_Response, error) {
+	req := c.c.NewRequest(c.name, "Borrow.FindBorrowAll", in)
+	out := new(Borrowlogs_Response)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *borrowService) FindBorrowByID(ctx context.Context, in *ID_Request, opts ...client.CallOption) (*Borrowlog_Response, error) {
+	req := c.c.NewRequest(c.name, "Borrow.FindBorrowByID", in)
+	out := new(Borrowlog_Response)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *borrowService) FindBorrowByWID(ctx context.Context, in *WID_Request, opts ...client.CallOption) (*Borrowlogs_Response, error) {
+	req := c.c.NewRequest(c.name, "Borrow.FindBorrowByWID", in)
+	out := new(Borrowlogs_Response)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *borrowService) FindBorrowByPID(ctx context.Context, in *PID_Request, opts ...client.CallOption) (*Borrowlogs_Response, error) {
+	req := c.c.NewRequest(c.name, "Borrow.FindBorrowByPID", in)
+	out := new(Borrowlogs_Response)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for Borrow service
 
 type BorrowHandler interface {
@@ -107,6 +151,10 @@ type BorrowHandler interface {
 	Return(context.Context, *Returns_Request, *Response) error
 	ToOther(context.Context, *ToOtherRequest, *Response) error
 	CheckToOther(context.Context, *ToOtherRequest, *Response) error
+	FindBorrowAll(context.Context, *Null_Request, *Borrowlogs_Response) error
+	FindBorrowByID(context.Context, *ID_Request, *Borrowlog_Response) error
+	FindBorrowByWID(context.Context, *WID_Request, *Borrowlogs_Response) error
+	FindBorrowByPID(context.Context, *PID_Request, *Borrowlogs_Response) error
 }
 
 func RegisterBorrowHandler(s server.Server, hdlr BorrowHandler, opts ...server.HandlerOption) error {
@@ -115,6 +163,10 @@ func RegisterBorrowHandler(s server.Server, hdlr BorrowHandler, opts ...server.H
 		Return(ctx context.Context, in *Returns_Request, out *Response) error
 		ToOther(ctx context.Context, in *ToOtherRequest, out *Response) error
 		CheckToOther(ctx context.Context, in *ToOtherRequest, out *Response) error
+		FindBorrowAll(ctx context.Context, in *Null_Request, out *Borrowlogs_Response) error
+		FindBorrowByID(ctx context.Context, in *ID_Request, out *Borrowlog_Response) error
+		FindBorrowByWID(ctx context.Context, in *WID_Request, out *Borrowlogs_Response) error
+		FindBorrowByPID(ctx context.Context, in *PID_Request, out *Borrowlogs_Response) error
 	}
 	type Borrow struct {
 		borrow
@@ -141,4 +193,20 @@ func (h *borrowHandler) ToOther(ctx context.Context, in *ToOtherRequest, out *Re
 
 func (h *borrowHandler) CheckToOther(ctx context.Context, in *ToOtherRequest, out *Response) error {
 	return h.BorrowHandler.CheckToOther(ctx, in, out)
+}
+
+func (h *borrowHandler) FindBorrowAll(ctx context.Context, in *Null_Request, out *Borrowlogs_Response) error {
+	return h.BorrowHandler.FindBorrowAll(ctx, in, out)
+}
+
+func (h *borrowHandler) FindBorrowByID(ctx context.Context, in *ID_Request, out *Borrowlog_Response) error {
+	return h.BorrowHandler.FindBorrowByID(ctx, in, out)
+}
+
+func (h *borrowHandler) FindBorrowByWID(ctx context.Context, in *WID_Request, out *Borrowlogs_Response) error {
+	return h.BorrowHandler.FindBorrowByWID(ctx, in, out)
+}
+
+func (h *borrowHandler) FindBorrowByPID(ctx context.Context, in *PID_Request, out *Borrowlogs_Response) error {
+	return h.BorrowHandler.FindBorrowByPID(ctx, in, out)
 }
