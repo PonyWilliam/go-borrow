@@ -66,7 +66,11 @@ func(p *ProductLog)FindBorrowAll(ctx context.Context,req *borrow.Null_Request,rs
 		rsp.Logs = nil
 		return nil
 	}
-	_ = common.SwapTo(res, rsp)
+	temp := &borrow.Borrowlog_Response{}
+	for _,v := range res{
+		_ = common.SwapTo(v, temp)
+		rsp.Logs = append(rsp.Logs,temp)
+	}
 	return nil
 }
 func(p *ProductLog)FindBorrowByID(ctx context.Context,req *borrow.ID_Request,rsp *borrow.Borrowlog_Response)error{
@@ -84,7 +88,11 @@ func(p *ProductLog)FindBorrowByWID(ctx context.Context,req *borrow.WID_Request,r
 		rsp.Logs = nil
 		return nil
 	}
-	_ = common.SwapTo(res, rsp)
+	temp := &borrow.Borrowlog_Response{}
+	for _,v := range res{
+		_ = common.SwapTo(v, temp)
+		rsp.Logs = append(rsp.Logs,temp)
+	}
 	return nil
 }
 func(p *ProductLog)FindBorrowByPID(ctx context.Context,req *borrow.PID_Request,rsp *borrow.Borrowlogs_Response)error{
@@ -93,6 +101,10 @@ func(p *ProductLog)FindBorrowByPID(ctx context.Context,req *borrow.PID_Request,r
 		rsp.Logs = nil
 		return nil
 	}
-	_ = common.SwapTo(res, rsp)
+	temp := &borrow.Borrowlog_Response{}
+	for _,v := range res{
+		_ = common.SwapTo(v, temp)
+		rsp.Logs = append(rsp.Logs,temp)
+	}
 	return nil
 }

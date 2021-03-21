@@ -14,10 +14,10 @@ type IProductLog interface {
 	Return(ID int64)error
 	UpdateToOther(ID int64,WID int64)error//转借给其它人的记录
 	CheckToOther(ID int64,WID int64)error
-	FindBorrowAll()([]*model.ProductLog,error)
-	FindBorrowByID(ID int64)(*model.ProductLog,error)
-	FindBorrowByWID(WID int64)([]*model.ProductLog,error)
-	FindBorrowByProductID(PID int64)([]*model.ProductLog,error)
+	FindBorrowAll()([]model.ProductLog,error)
+	FindBorrowByID(ID int64)(model.ProductLog,error)
+	FindBorrowByWID(WID int64)([]model.ProductLog,error)
+	FindBorrowByProductID(PID int64)([]model.ProductLog,error)
 }
 func NewProductLogRepository(db *gorm.DB)	IProductLog{
 	return &ProductLog{mysql: db}
@@ -32,7 +32,7 @@ func(p *ProductLog)InitTable()error{
 	return p.mysql.CreateTable(&model.ProductLog{}).Error
 }
 func(p *ProductLog)Borrow(WID int64,PID int64,ScheduleTime int64)(id int64,err error){
-	log := &model.ProductLog{BorrowTime: time.Now().Unix(),PID: PID,WID: WID,ScheduleTime: ScheduleTime,ReturnTime:0,Description: "首次借出"}
+	log := &model.ProductLog{BorrowTime: time.Now().Unix(),Pid: PID,Wid: WID,ScheduleTime: ScheduleTime,ReturnTime:0,Description: "首次借出"}
 	return log.ID,p.mysql.Model(log).Create(&log).Error
 }
 func(p *ProductLog)Return(ID int64)error{
@@ -54,10 +54,10 @@ func(p *ProductLog)UpdateToOther(ID int64,WID int64)error{
 		return err
 	}
 	p.mysql.Where("id = ?",ID).Find(&log)
-	log.Description = "转借于:" + strconv.FormatInt(log.WID,10)
+	log.Description = "转借于:" + strconv.FormatInt(log.Wid,10)
 	log.BorrowTime = times
 	log.ReturnTime = 0
-	log.WID = WID
+	log.Wid = WID
 	log.ID = 0
 	return p.mysql.Model(log).Create(&log).Error
 }
@@ -69,7 +69,7 @@ func(p *ProductLog)CheckToOther(ID int64,WID int64)error{
 	if log.ReturnTime != 0{
 		return errors.New("已归还物品不能转移")
 	}
-	if log.WID == WID{
+	if log.Wid == WID{
 		return errors.New("不能转借给自己")
 	}
 
@@ -87,15 +87,15 @@ func(p *ProductLog)CheckToOther(ID int64,WID int64)error{
 	FindBorrowByWID(WID int64)([]*model.ProductLog,error)
 	FindBorrowByProductID(PID int64)([]*model.ProductLog,error)
 */
-func(p *ProductLog)FindBorrowAll()(logs []*model.ProductLog,err error){
-	return logs,p.mysql.Model(&logs).Find(logs).Error
+func(p *ProductLog)FindBorrowAll()(logs []model.ProductLog,err error){
+	return logs,p.mysql.Model(&logs).Find(&logs).Error
 }
-func(p *ProductLog)FindBorrowByID(ID int64)(log *model.ProductLog,err error){
-	return log,p.mysql.Where("id = ?",ID).Find(log).Error
+func(p *ProductLog)FindBorrowByID(ID int64)(log model.ProductLog,err error){
+	return log,p.mysql.Model(&model.ProductLog{}).Where("id  = ?",ID).Find(&log).Error
 }
-func(p *ProductLog)FindBorrowByWID(WID int64)(logs []*model.ProductLog,err error){
-	return logs,p.mysql.Where("wid = ?",WID).Find(logs).Error
+func(p *ProductLog)FindBorrowByWID(WID int64)(logs []model.ProductLog,err error){
+	return logs,p.mysql.Where("pid = ?",WID).Find(&logs).Error
 }
-func(p *ProductLog)FindBorrowByProductID(PID int64)(logs []*model.ProductLog,err error){
-	return logs,p.mysql.Where("pid = ?",PID).Find(logs).Error
+func(p *ProductLog)FindBorrowByProductID(PID int64)(logs []model.ProductLog,err error){
+	return logs,p.mysql.Where("wid = ?",PID).Find(&logs).Error
 }

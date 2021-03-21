@@ -30,12 +30,12 @@ type Borrow_Request struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	WorkerId     int64  `protobuf:"varint,1,opt,name=worker_id,json=workerId,proto3" json:"worker_id,omitempty"`             //借出人信息
-	ProductId    int64  `protobuf:"varint,2,opt,name=product_id,json=productId,proto3" json:"product_id,omitempty"`          //借出产品信息
-	BorrowTime   int64  `protobuf:"varint,3,opt,name=borrow_time,json=borrowTime,proto3" json:"borrow_time,omitempty"`       //借出时间
-	ScheduleTime int64  `protobuf:"varint,4,opt,name=schedule_time,json=scheduleTime,proto3" json:"schedule_time,omitempty"` //预计归还时间
-	ReturnTime   int64  `protobuf:"varint,5,opt,name=return_time,json=returnTime,proto3" json:"return_time,omitempty"`
-	Description  string `protobuf:"bytes,6,opt,name=description,proto3" json:"description,omitempty"` //备注信息,转借等等说明
+	WorkerId     int64  `protobuf:"varint,1,opt,name=worker_id,json=workerId,proto3" json:"worker_id"`             //借出人信息
+	ProductId    int64  `protobuf:"varint,2,opt,name=product_id,json=productId,proto3" json:"product_id"`          //借出产品信息
+	BorrowTime   int64  `protobuf:"varint,3,opt,name=borrow_time,json=borrowTime,proto3" json:"borrow_time"`       //借出时间
+	ScheduleTime int64  `protobuf:"varint,4,opt,name=schedule_time,json=scheduleTime,proto3" json:"schedule_time"` //预计归还时间
+	ReturnTime   int64  `protobuf:"varint,5,opt,name=return_time,json=returnTime,proto3" json:"return_time"`
+	Description  string `protobuf:"bytes,6,opt,name=description,proto3" json:"description"` //备注信息,转借等等说明
 }
 
 func (x *Borrow_Request) Reset() {
@@ -155,7 +155,7 @@ type ID_Request struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id int64 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Id int64 `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
 }
 
 func (x *ID_Request) Reset() {
@@ -202,7 +202,7 @@ type WID_Request struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	WID int64 `protobuf:"varint,1,opt,name=WID,proto3" json:"WID,omitempty"`
+	WID int64 `protobuf:"varint,1,opt,name=WID,proto3" json:"WID"`
 }
 
 func (x *WID_Request) Reset() {
@@ -249,7 +249,7 @@ type PID_Request struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	PID int64 `protobuf:"varint,1,opt,name=PID,proto3" json:"PID,omitempty"`
+	PID int64 `protobuf:"varint,1,opt,name=PID,proto3" json:"PID"`
 }
 
 func (x *PID_Request) Reset() {
@@ -307,15 +307,15 @@ type Borrowlog_Response struct {
 	//BelongArea int64 `json:"belong_area"`//所属库房
 	//HashCode string `json:"hash_code"`//为了让管理人员不作弊的校验码,但实际上如果删库就会没有意义，除非与员工出借记录分开管理。所以还是得用区块链保证无法作弊。
 	//
-	ID           int64  `protobuf:"varint,1,opt,name=ID,proto3" json:"ID,omitempty"`
-	PID          int64  `protobuf:"varint,2,opt,name=PID,proto3" json:"PID,omitempty"`
-	WID          int64  `protobuf:"varint,3,opt,name=WID,proto3" json:"WID,omitempty"`
-	BorrowTime   int64  `protobuf:"varint,4,opt,name=BorrowTime,proto3" json:"BorrowTime,omitempty"`
-	ScheduleTime int64  `protobuf:"varint,5,opt,name=ScheduleTime,proto3" json:"ScheduleTime,omitempty"`
-	ReturnTime   int64  `protobuf:"varint,6,opt,name=ReturnTime,proto3" json:"ReturnTime,omitempty"`
-	Description  string `protobuf:"bytes,7,opt,name=Description,proto3" json:"Description,omitempty"`
-	BelongArea   int64  `protobuf:"varint,8,opt,name=BelongArea,proto3" json:"BelongArea,omitempty"`
-	HashCode     string `protobuf:"bytes,9,opt,name=HashCode,proto3" json:"HashCode,omitempty"`
+	ID           int64  `protobuf:"varint,1,opt,name=ID,proto3" json:"ID"`
+	PID          int64  `protobuf:"varint,2,opt,name=PID,proto3" json:"PID"`
+	WID          int64  `protobuf:"varint,3,opt,name=WID,proto3" json:"WID"`
+	BorrowTime   int64  `protobuf:"varint,4,opt,name=BorrowTime,proto3" json:"BorrowTime"`
+	ScheduleTime int64  `protobuf:"varint,5,opt,name=ScheduleTime,proto3" json:"ScheduleTime"`
+	ReturnTime   int64  `protobuf:"varint,6,opt,name=ReturnTime,proto3" json:"ReturnTime"`
+	Description  string `protobuf:"bytes,7,opt,name=Description,proto3" json:"Description"`
+	BelongArea   int64  `protobuf:"varint,8,opt,name=BelongArea,proto3" json:"BelongArea"`
+	HashCode     string `protobuf:"bytes,9,opt,name=HashCode,proto3" json:"HashCode"`
 }
 
 func (x *Borrowlog_Response) Reset() {
@@ -418,7 +418,7 @@ type Borrowlogs_Response struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Logs []*Borrowlog_Response `protobuf:"bytes,1,rep,name=logs,proto3" json:"logs,omitempty"`
+	Logs []*Borrowlog_Response `protobuf:"bytes,1,rep,name=logs,proto3" json:"logs"`
 }
 
 func (x *Borrowlogs_Response) Reset() {
@@ -465,7 +465,7 @@ type Returns_Request struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id int64 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Id int64 `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
 }
 
 func (x *Returns_Request) Reset() {
@@ -512,8 +512,8 @@ type ToOtherRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id  int64 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`   //物品已有记录
-	Wid int64 `protobuf:"varint,2,opt,name=wid,proto3" json:"wid,omitempty"` //其它人的id，方便变更
+	Id  int64 `protobuf:"varint,1,opt,name=id,proto3" json:"id"`   //物品已有记录
+	Wid int64 `protobuf:"varint,2,opt,name=wid,proto3" json:"wid"` //其它人的id，方便变更
 }
 
 func (x *ToOtherRequest) Reset() {
@@ -567,8 +567,8 @@ type Response struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Status  int64  `protobuf:"varint,1,opt,name=status,proto3" json:"status,omitempty"`
-	Message string `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"`
+	Status  int64  `protobuf:"varint,1,opt,name=status,proto3" json:"status"`
+	Message string `protobuf:"bytes,2,opt,name=message,proto3" json:"message"`
 }
 
 func (x *Response) Reset() {
