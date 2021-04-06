@@ -14,6 +14,7 @@ type IProService interface {
 	FindBorrowByID(ID int64)(model.ProductLog,error)
 	FindBorrowByWID(WID int64)([]model.ProductLog,error)
 	FindBorrowByProductID(PID int64)([]model.ProductLog,error)
+	TestLog()(int64,error)
 }
 func NewWorkerService(pro repository.IProductLog)IProService{
 	return &ProServices{pro}
@@ -44,4 +45,7 @@ func(p *ProServices)FindBorrowByWID(WID int64)([]model.ProductLog,error){
 }
 func(p *ProServices)FindBorrowByProductID(PID int64)([]model.ProductLog,error){
 	return p.pro.FindBorrowByProductID(PID)
+}
+func(p *ProServices)TestLog()(int64,error){
+	return p.pro.TestLog()
 }

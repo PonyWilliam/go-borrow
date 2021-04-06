@@ -2,9 +2,9 @@ package handler
 
 import (
 	"context"
+	"github.com/PonyWilliam/go-borrow/domain/model"
 	"github.com/PonyWilliam/go-borrow/domain/server"
 	borrow "github.com/PonyWilliam/go-borrow/proto"
-	"github.com/PonyWilliam/go-common"
 	"strconv"
 )
 
@@ -66,32 +66,37 @@ func(p *ProductLog)FindBorrowAll(ctx context.Context,req *borrow.Null_Request,rs
 		rsp.Logs = nil
 		return nil
 	}
-	temp := &borrow.Borrowlog_Response{}
 	for _,v := range res{
-		_ = common.SwapTo(v, temp)
-		rsp.Logs = append(rsp.Logs,temp)
+		rsp.Logs = append(rsp.Logs,Swap(v))
 	}
 	return nil
 }
-func(p *ProductLog)FindBorrowByID(ctx context.Context,req *borrow.ID_Request,rsp *borrow.Borrowlog_Response)error{
-	res,err := p.IProService.FindBorrowByID(req.Id)
+func(p *ProductLog)FindBorrowByID(ctx context.Context,req2 *borrow.ID_Request,rsp *borrow.Borrowlog_Response)error{
+	req,err := p.IProService.FindBorrowByID(req2.Id)
 	if err!=nil{
 		rsp = nil
 		return nil
 	}
-	_ = common.SwapTo(res, rsp)
+	rsp.ID = req.Id
+	rsp.ReturnTime = req.ReturnTime
+	rsp.BorrowTime = req.BorrowTime
+	rsp.PID = req.Pid
+	rsp.WID = req.Wid
+	rsp.Description = req.Description
+	rsp.PreHash = []byte(req.PreHash[:])
+	rsp.Hash = []byte(req.Hash[:])
+	rsp.BelongArea = req.BelongArea
+	rsp.ScheduleTime = req.ScheduleTime
 	return nil
 }
 func(p *ProductLog)FindBorrowByWID(ctx context.Context,req *borrow.WID_Request,rsp *borrow.Borrowlogs_Response)error{
 	res,err := p.IProService.FindBorrowByWID(req.WID)
 	if err!=nil{
 		rsp.Logs = nil
-		return nil
+		return err
 	}
-	temp := &borrow.Borrowlog_Response{}
 	for _,v := range res{
-		_ = common.SwapTo(v, temp)
-		rsp.Logs = append(rsp.Logs,temp)
+		rsp.Logs = append(rsp.Logs,Swap(v))
 	}
 	return nil
 }
@@ -99,12 +104,32 @@ func(p *ProductLog)FindBorrowByPID(ctx context.Context,req *borrow.PID_Request,r
 	res,err := p.IProService.FindBorrowByProductID(req.PID)
 	if err!=nil{
 		rsp.Logs = nil
-		return nil
+		return err
 	}
-	temp := &borrow.Borrowlog_Response{}
 	for _,v := range res{
-		_ = common.SwapTo(v, temp)
-		rsp.Logs = append(rsp.Logs,temp)
+		rsp.Logs = append(rsp.Logs,Swap(v))
 	}
 	return nil
+}
+func(p *ProductLog)TestLog(ctx context.Context,req *borrow.Null_Request,rsp *borrow.Response_HashTest)error{
+	var err error
+	rsp.Id,err = p.IProService.TestLog()
+	if err != nil{
+		return err
+	}
+	return nil
+}
+func Swap(req model.ProductLog)*borrow.Borrowlog_Response{
+	temp := borrow.Borrowlog_Response{}
+	temp.ID = req.Id
+	temp.ReturnTime = req.ReturnTime
+	temp.BorrowTime = req.BorrowTime
+	temp.PID = req.Pid
+	temp.WID = req.Wid
+	temp.Description = req.Description
+	temp.PreHash = []byte(req.PreHash[:])
+	temp.Hash = []byte(req.Hash[:])
+	temp.BelongArea = req.BelongArea
+	temp.ScheduleTime = req.ScheduleTime
+	return &temp
 }

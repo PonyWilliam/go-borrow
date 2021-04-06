@@ -50,6 +50,7 @@ type BorrowService interface {
 	FindBorrowByID(ctx context.Context, in *ID_Request, opts ...client.CallOption) (*Borrowlog_Response, error)
 	FindBorrowByWID(ctx context.Context, in *WID_Request, opts ...client.CallOption) (*Borrowlogs_Response, error)
 	FindBorrowByPID(ctx context.Context, in *PID_Request, opts ...client.CallOption) (*Borrowlogs_Response, error)
+	TestLog(ctx context.Context, in *Null_Request, opts ...client.CallOption) (*Response_HashTest, error)
 }
 
 type borrowService struct {
@@ -144,6 +145,16 @@ func (c *borrowService) FindBorrowByPID(ctx context.Context, in *PID_Request, op
 	return out, nil
 }
 
+func (c *borrowService) TestLog(ctx context.Context, in *Null_Request, opts ...client.CallOption) (*Response_HashTest, error) {
+	req := c.c.NewRequest(c.name, "Borrow.TestLog", in)
+	out := new(Response_HashTest)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for Borrow service
 
 type BorrowHandler interface {
@@ -155,6 +166,7 @@ type BorrowHandler interface {
 	FindBorrowByID(context.Context, *ID_Request, *Borrowlog_Response) error
 	FindBorrowByWID(context.Context, *WID_Request, *Borrowlogs_Response) error
 	FindBorrowByPID(context.Context, *PID_Request, *Borrowlogs_Response) error
+	TestLog(context.Context, *Null_Request, *Response_HashTest) error
 }
 
 func RegisterBorrowHandler(s server.Server, hdlr BorrowHandler, opts ...server.HandlerOption) error {
@@ -167,6 +179,7 @@ func RegisterBorrowHandler(s server.Server, hdlr BorrowHandler, opts ...server.H
 		FindBorrowByID(ctx context.Context, in *ID_Request, out *Borrowlog_Response) error
 		FindBorrowByWID(ctx context.Context, in *WID_Request, out *Borrowlogs_Response) error
 		FindBorrowByPID(ctx context.Context, in *PID_Request, out *Borrowlogs_Response) error
+		TestLog(ctx context.Context, in *Null_Request, out *Response_HashTest) error
 	}
 	type Borrow struct {
 		borrow
@@ -209,4 +222,8 @@ func (h *borrowHandler) FindBorrowByWID(ctx context.Context, in *WID_Request, ou
 
 func (h *borrowHandler) FindBorrowByPID(ctx context.Context, in *PID_Request, out *Borrowlogs_Response) error {
 	return h.BorrowHandler.FindBorrowByPID(ctx, in, out)
+}
+
+func (h *borrowHandler) TestLog(ctx context.Context, in *Null_Request, out *Response_HashTest) error {
+	return h.BorrowHandler.TestLog(ctx, in, out)
 }

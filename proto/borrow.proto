@@ -18,6 +18,7 @@ service Borrow {
   rpc FindBorrowByID(ID_Request)returns(Borrowlog_Response);
   rpc FindBorrowByWID(WID_Request)returns(Borrowlogs_Response);
   rpc FindBorrowByPID(PID_Request)returns(Borrowlogs_Response);
+  rpc TestLog(Null_Request)returns(Response_HashTest);
 }
 message Borrow_Request{
   int64 worker_id = 1;//借出人信息
@@ -60,7 +61,8 @@ message Borrowlog_Response{
   int64 ReturnTime = 6;
   string Description = 7;
   int64 BelongArea = 8;
-  string HashCode = 9;
+  bytes Hash = 9;
+  bytes PreHash = 10;
 }
 message Borrowlogs_Response{
   repeated Borrowlog_Response logs = 1;
@@ -75,6 +77,9 @@ message to_other_request{
 message Response{
   int64 status = 1;
   string message = 2;
+}
+message Response_HashTest{
+  int64 id = 1;
 }
 /*
 package model
