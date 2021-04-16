@@ -61,8 +61,8 @@ message Borrowlog_Response{
   int64 ReturnTime = 6;
   string Description = 7;
   int64 BelongArea = 8;
-  bytes Hash = 9;
-  bytes PreHash = 10;
+  string Hash = 9;
+  string PreHash = 10;
 }
 message Borrowlogs_Response{
   repeated Borrowlog_Response logs = 1;

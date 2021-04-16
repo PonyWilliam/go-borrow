@@ -36,10 +36,8 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/domain/model/product_log.go" beforeDir="false" afterPath="$PROJECT_DIR$/domain/model/product_log.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/domain/repository/product_log.go" beforeDir="false" afterPath="$PROJECT_DIR$/domain/repository/product_log.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/domain/server/product_log.go" beforeDir="false" afterPath="$PROJECT_DIR$/domain/server/product_log.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/handler/borrow.go" beforeDir="false" afterPath="$PROJECT_DIR$/handler/borrow.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/proto/borrow.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/borrow.pb.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/borrow.pb.micro.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/borrow.pb.micro.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/proto/borrow.proto" beforeDir="false" afterPath="$PROJECT_DIR$/proto/borrow.proto" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../borrowLogs/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../borrowLogs/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../borrowLogs/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/../borrowLogs/Makefile" afterDir="false" />
@@ -81,6 +79,7 @@
       <change beforePath="$PROJECT_DIR$/../works/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../works/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../works/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/../works/Dockerfile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../works/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/../works/Makefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../works/domain/model/work.go" beforeDir="false" afterPath="$PROJECT_DIR$/../works/domain/model/work.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../works/domain/repository/work_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/../works/domain/repository/work_repository.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../works/domain/server/work_server.go" beforeDir="false" afterPath="$PROJECT_DIR$/../works/domain/server/work_server.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../works/go.mod" beforeDir="false" />
@@ -119,6 +118,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="DefaultGoTemplateProperty" value="Go File" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
@@ -180,6 +180,9 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
   <component name="VgoProject">
     <integration-enabled>true</integration-enabled>

@@ -2,6 +2,7 @@ package handler
 
 import (
 	"context"
+	"encoding/hex"
 	"github.com/PonyWilliam/go-borrow/domain/model"
 	"github.com/PonyWilliam/go-borrow/domain/server"
 	borrow "github.com/PonyWilliam/go-borrow/proto"
@@ -83,8 +84,8 @@ func(p *ProductLog)FindBorrowByID(ctx context.Context,req2 *borrow.ID_Request,rs
 	rsp.PID = req.Pid
 	rsp.WID = req.Wid
 	rsp.Description = req.Description
-	rsp.PreHash = []byte(req.PreHash[:])
-	rsp.Hash = []byte(req.Hash[:])
+	rsp.PreHash = hex.EncodeToString(req.PreHash)
+	rsp.Hash = hex.EncodeToString(req.Hash)
 	rsp.BelongArea = req.BelongArea
 	rsp.ScheduleTime = req.ScheduleTime
 	return nil
@@ -127,8 +128,8 @@ func Swap(req model.ProductLog)*borrow.Borrowlog_Response{
 	temp.PID = req.Pid
 	temp.WID = req.Wid
 	temp.Description = req.Description
-	temp.PreHash = []byte(req.PreHash[:])
-	temp.Hash = []byte(req.Hash[:])
+	temp.PreHash = hex.EncodeToString(req.PreHash)
+	temp.Hash = hex.EncodeToString(req.Hash)
 	temp.BelongArea = req.BelongArea
 	temp.ScheduleTime = req.ScheduleTime
 	return &temp

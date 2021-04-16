@@ -8,6 +8,6 @@ type ProductLog struct{
 	ReturnTime int64 `json:"ReturnTime"`//实际归还时间,给0代表是借出并为归还。
 	Description string `json:"Description"`
 	BelongArea int64 `json:"belong_area"`//所属库房
-	PreHash [32]byte `json:"pre_hash"`//记录上一节点哈希
-	Hash [32]byte `json:"hash"`
+	PreHash []byte `json:"pre_hash"`//记录上一节点哈希
+	Hash []byte `json:"hash"`
 }
