@@ -19,4 +19,6 @@ test:
 
 .PHONY: docker
 docker:
-	docker build . -t borrow:latest
+	docker build -t ponywilliam/go-borrow .
+	docker tag ponywilliam/go-borrow ponywilliam/go-borrow
+	docker push ponywilliam/go-borrow
